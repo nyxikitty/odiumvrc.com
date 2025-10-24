@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ODIUM COLLECTIVE - Register</title>
+  <meta name="description" content="Join the Odium Collective - an elite forum for advanced users." />
+  
+  <meta property="og:title" content="ODIUM COLLECTIVE - Register" />
+  <meta property="og:description" content="Join the Odium Collective - an elite forum for advanced users." />
+  <meta property="og:image" content="https://snoofz.net/public/uploads/6249af0c-484c-4f32-887e-638fc8f34aa9.png" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#e91f42" />
+  
+  <link rel="icon" type="image/png" href="https://snoofz.net/public/uploads/6249af0c-484c-4f32-887e-638fc8f34aa9.png" />
+  <link rel="stylesheet" href="./register.min.css">
+</head>
+<body>
+  <div class="cursor-dot" id="cDot"></div>
+  <div id="tsparticles"></div>
+
+  <div class="container">
+    <div class="register-wrapper">
+      <div class="logo-section">
+        <div class="logo"></div>
+        <h1 class="brand-name">ODIUM</h1>
+        <p class="tagline">Join the Collective</p>
+        <p class="subtitle">Create your account and stand on the podium</p>
+      </div>
+
+      <div class="register-box">
+        <div class="invite-notice">
+          🔒 Invite-Only Access Required
+        </div>
+
+        <h2 class="register-title">CREATE ACCOUNT</h2>
+        
+        <div class="error-msg" id="error-msg"></div>
+
+        <div id="register-form">
+          <div class="form-group">
+            <label>Invite Key</label>
+            <input type="text" id="invite-key" placeholder="ODIUM-XXXXX-XXXXX" autocomplete="off" style="text-transform: uppercase;">
+            <p class="password-requirements">Required to join</p>
+          </div>
+
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Choose a username" autocomplete="username" minlength="3" maxlength="20">
+            <p class="password-requirements">3-20 characters</p>
+          </div>
+
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Enter your email" autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Create a strong password" autocomplete="new-password" minlength="6">
+            <p class="password-requirements">Minimum 6 characters</p>
+          </div>
+
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" id="confirm-password" placeholder="Confirm your password" autocomplete="new-password">
+          </div>
+
+          <button class="submit-btn" id="submit-btn">SEND VERIFICATION CODE</button>
+        </div>
+
+        <div id="verification-form" style="display: none;">
+          <div class="form-group">
+            <label>Verification Code</label>
+            <input type="text" id="verification-code" placeholder="Enter 6-digit code" maxlength="6" autocomplete="off" style="text-align: center; font-size: 1.5rem; letter-spacing: 0.5em;">
+            <p class="password-requirements">Check your email for the verification code</p>
+          </div>
+
+          <button class="submit-btn" id="verify-btn">VERIFY & CREATE ACCOUNT</button>
+          <button class="submit-btn" id="resend-btn" style="background: transparent; border: 2px solid #e91f42; color: #ff6b8a; margin-top: 0.5rem;">RESEND CODE</button>
+        </div>
+
+        <div class="toggle-text">
+          Already have an account?
+          <a href="/" class="toggle-link">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/2.12.0/tsparticles.bundle.min.js"></script>
+  <script src="./register.ob.min.js"></script>
+</body>
+</html>

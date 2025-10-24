@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - ODIUM COLLECTIVE</title>
+  <link rel="icon" type="image/png" href="https://snoofz.net/public/uploads/6249af0c-484c-4f32-887e-638fc8f34aa9.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://odiumvrc.com/profile.css">
+</head>
+<body>
+  <div class="cursor-dot" id="cDot"></div>
+  <div id="tsparticles"></div>
+
+  <!-- Incoming Call Modal - Discord Style -->
+  <div class="incoming-call-modal" id="incoming-call-modal">
+    <div class="incoming-call-content">
+      <img src="https://via.placeholder.com/120" alt="Caller" class="incoming-call-avatar" id="incoming-caller-avatar">
+      <div class="incoming-call-username" id="incoming-caller-username">Username</div>
+      <div class="incoming-call-type" id="incoming-call-type">
+        <i class="fas fa-phone-volume"></i>
+        <span>Incoming Voice Call</span>
+      </div>
+      <div class="incoming-call-actions">
+        <button class="incoming-call-btn accept" id="accept-call-btn">
+          <i class="fas fa-phone"></i>
+        </button>
+        <button class="incoming-call-btn decline" id="decline-call-btn">
+          <i class="fas fa-phone-slash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discord-Style Call Container -->
+  <div class="call-container" id="call-container">
+    <!-- Call Header -->
+    <div class="call-header">
+      <div class="call-header-left">
+        <div class="call-header-title" id="call-header-title">
+          <i class="fas fa-phone-volume"></i> Voice Call
+        </div>
+        <div class="call-status-indicator">
+          <div class="status-dot"></div>
+          <span id="call-status">Calling...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call Grid -->
+    <div class="call-grid" id="call-grid">
+      <!-- Remote User Tile -->
+      <div class="user-tile" id="remote-tile">
+        <video class="user-video hidden" id="remote-video" autoplay playsinline></video>
+        <div class="user-avatar-container" id="remote-avatar-container">
+          <img src="https://via.placeholder.com/220" alt="Remote User" class="user-avatar" id="remote-avatar">
+        </div>
+        <div class="user-info">
+          <div class="user-name" id="remote-username">Connecting...</div>
+          <div class="user-status">
+            <div class="status-icon" id="remote-mute-icon">
+              <i class="fas fa-microphone"></i>
+            </div>
+            <div class="status-icon hidden" id="remote-video-icon">
+              <i class="fas fa-video"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Local User Tile -->
+      <div class="user-tile" id="local-tile">
+        <video class="user-video hidden" id="local-video" autoplay playsinline muted></video>
+        <div class="user-avatar-container" id="local-avatar-container">
+          <img src="https://via.placeholder.com/220" alt="You" class="user-avatar" id="local-avatar">
+        </div>
+        <div class="user-info">
+          <div class="user-name" id="local-username">You</div>
+          <div class="user-status">
+            <div class="status-icon" id="local-mute-icon">
+              <i class="fas fa-microphone"></i>
+            </div>
+            <div class="status-icon hidden" id="local-video-icon">
+              <i class="fas fa-video"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call Controls -->
+    <div class="call-controls">
+      <button class="control-btn" id="mute-btn">
+        <span class="control-label">Mute</span>
+        <i class="fas fa-microphone"></i>
+      </button>
+
+      <button class="control-btn hidden" id="video-btn">
+        <span class="control-label">Camera</span>
+        <i class="fas fa-video"></i>
+      </button>
+
+      <button class="control-btn hangup" id="hangup-btn">
+        <span class="control-label">End Call</span>
+        <i class="fas fa-phone-slash"></i>
+      </button>
+    </div>
+  </div>
+
+  <header>
+    <div class="header-content">
+      <div class="header-left">
+        <div class="header-logo"></div>
+        <div class="header-title">
+          <h1>ODIUM COLLECTIVE</h1>
+        </div>
+      </div>
+      <a href="/forum" class="back-to-forum">
+        <i class="fas fa-arrow-left"></i>
+        BACK TO FORUM
+      </a>
+    </div>
+  </header>
+
+  <main class="profile-container">
+    <div class="profile-banner" id="profile-banner">
+      <img id="banner-img" style="display: none;">
+      <button class="banner-upload-btn" id="banner-upload-btn" style="display: none;">
+        <i class="fas fa-upload"></i>
+        Change Banner
+      </button>
+      <input type="file" id="banner-input" accept="image/*">
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar-section">
+          <img id="profile-avatar" class="profile-avatar" src="https://via.placeholder.com/150" alt="Profile">
+          <button class="avatar-upload-btn" id="avatar-upload-btn" style="display: none;">
+            <i class="fas fa-camera"></i>
+          </button>
+          <input type="file" id="avatar-input" accept="image/*">
+        </div>
+
+        <div class="profile-info">
+          <h2 class="profile-username" id="profile-username">Username</h2>
+          <span class="profile-role" id="profile-role">User</span>
+          
+          <div class="profile-stats">
+            <div class="stat">
+              <div class="stat-value" id="stat-posts">0</div>
+              <div class="stat-label">Posts</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" id="stat-reputation">0</div>
+              <div class="stat-label">Reputation</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" id="stat-level">1</div>
+              <div class="stat-label">Level</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" id="stat-joined">Jan 2025</div>
+              <div class="stat-label">Joined</div>
+            </div>
+          </div>
+
+          <div class="profile-actions" id="profile-actions"></div>
+        </div>
+      </div>
+
+      <div class="profile-details" id="profile-details">
+        <div class="detail-row">
+          <div class="detail-label">Bio</div>
+          <div class="detail-value">Not set</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Email</div>
+          <div class="detail-value">Not set</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Location</div>
+          <div class="detail-value">Not set</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Website</div>
+          <div class="detail-value">Not set</div>
+        </div>
+      </div>
+
+      <div class="admin-panel" id="admin-panel">
+        <h3 class="admin-title">
+          <i class="fas fa-shield-alt"></i>
+          Admin Controls
+        </h3>
+        <div class="admin-actions" id="admin-actions"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modals -->
+  <div class="modal" id="ban-modal">
+    <div class="modal-content">
+      <h3 class="modal-title"><i class="fas fa-ban"></i> Ban User</h3>
+      <input type="text" class="modal-input" id="ban-reason" placeholder="Enter ban reason...">
+      <div class="modal-buttons">
+        <button class="modal-confirm" id="confirm-ban">BAN</button>
+        <button class="modal-cancel" id="cancel-ban">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="dm-modal">
+    <div class="modal-content">
+      <h3 class="modal-title"><i class="fas fa-envelope"></i> Send Message</h3>
+      <textarea class="modal-input" id="dm-message" placeholder="Type your message..." rows="4"></textarea>
+      <div class="modal-buttons">
+        <button class="modal-confirm" id="confirm-dm">SEND</button>
+        <button class="modal-cancel" id="cancel-dm">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="custom-alert-modal">
+    <div class="modal-content" style="max-width: 500px;">
+      <h2 class="modal-title" id="alert-title">
+        <i class="fas fa-info-circle"></i> NOTIFICATION
+      </h2>
+      <div style="padding: 1rem 0; color: rgba(255,255,255,0.85); font-size: 1.1rem; text-align: center;" id="alert-message"></div>
+      <div class="modal-buttons">
+        <button class="modal-confirm" onclick="closeCustomAlert()" style="width: 100%;">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="custom-confirm-modal">
+    <div class="modal-content" style="max-width: 500px;">
+      <h2 class="modal-title" id="confirm-title">
+        <i class="fas fa-question-circle"></i> CONFIRM
+      </h2>
+      <div style="padding: 1rem 0; color: rgba(255,255,255,0.85); font-size: 1.1rem; text-align: center;" id="confirm-message"></div>
+      <div class="modal-buttons">
+        <button class="modal-confirm" id="confirm-yes-btn">YES</button>
+        <button class="modal-cancel" id="confirm-no-btn">NO</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="custom-prompt-modal">
+    <div class="modal-content" style="max-width: 500px;">
+      <h2 class="modal-title" id="prompt-title">
+        <i class="fas fa-edit"></i> INPUT
+      </h2>
+      <div style="padding: 1rem 0; color: rgba(255,255,255,0.85); margin-bottom: 1rem;" id="prompt-message"></div>
+      <div style="margin-bottom: 1rem;">
+        <textarea id="prompt-input" class="modal-input" rows="4" placeholder="Enter your text..." style="width: 100%; margin-bottom: 0;"></textarea>
+      </div>
+      <div class="modal-buttons">
+        <button class="modal-confirm" id="prompt-submit-btn">SUBMIT</button>
+        <button class="modal-cancel" id="prompt-cancel-btn">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/2.12.0/tsparticles.bundle.min.js"></script>
+  <script src="https://odiumvrc.com/profile.js"></script>
+</body>
+</html>

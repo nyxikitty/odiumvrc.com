@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ODIUM COLLECTIVE - Enhanced Forum</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./forum.css">
+</head>
+<body>
+  <div class="cursor-dot" id="cDot"></div>
+
+  <!-- Incoming Call Modal - Discord Style -->
+  <div class="incoming-call-modal" id="incoming-call-modal">
+    <div class="incoming-call-content">
+      <img src="https://via.placeholder.com/120" alt="Caller" class="incoming-call-avatar" id="incoming-caller-avatar">
+      <div class="incoming-call-username" id="incoming-caller-username">Username</div>
+      <div class="incoming-call-type" id="incoming-call-type">
+        <i class="fas fa-phone-volume"></i>
+        <span>Incoming Voice Call</span>
+      </div>
+      <div class="incoming-call-actions">
+        <button class="incoming-call-btn accept" id="accept-call-btn">
+          <i class="fas fa-phone"></i>
+        </button>
+        <button class="incoming-call-btn decline" id="decline-call-btn">
+          <i class="fas fa-phone-slash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minimized Call Widget -->
+  <div class="call-widget" id="call-widget">
+    <div class="call-widget-header">
+      <div class="call-widget-user">
+        <img src="https://via.placeholder.com/50" alt="User" class="call-widget-avatar" id="widget-avatar">
+        <div class="call-widget-info">
+          <div class="call-widget-name" id="widget-username">Username</div>
+          <div class="call-widget-status" id="widget-status">Connected</div>
+        </div>
+      </div>
+      <button class="call-widget-expand" id="expand-call-btn" title="Expand">
+        <i class="fas fa-expand"></i>
+      </button>
+    </div>
+    <div class="call-widget-controls">
+      <button class="call-widget-btn" id="widget-mute-btn">
+        <i class="fas fa-microphone"></i>
+      </button>
+      <button class="call-widget-btn hidden" id="widget-video-btn">
+        <i class="fas fa-video"></i>
+      </button>
+      <button class="call-widget-btn hangup" id="widget-hangup-btn">
+        <i class="fas fa-phone-slash"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Full Screen Call Container -->
+  <div class="call-container" id="call-container">
+    <div class="call-header">
+      <div class="call-header-left">
+        <div class="call-header-title" id="call-header-title">
+          <i class="fas fa-phone-volume"></i> Voice Call
+        </div>
+        <div class="call-status-indicator">
+          <div class="status-dot"></div>
+          <span id="call-status">Calling...</span>
+        </div>
+      </div>
+      <button class="call-minimize-btn" id="minimize-call-btn">
+        <i class="fas fa-minus"></i> Minimize
+      </button>
+    </div>
+
+    <div class="call-grid" id="call-grid">
+      <div class="user-tile" id="remote-tile">
+        <video class="user-video hidden" id="remote-video" autoplay playsinline></video>
+        <div class="user-avatar-container" id="remote-avatar-container">
+          <img src="https://via.placeholder.com/220" alt="Remote User" class="user-avatar" id="remote-avatar">
+        </div>
+        <div class="user-info">
+          <div class="user-name" id="remote-username">Connecting...</div>
+          <div class="user-status">
+            <div class="status-icon" id="remote-mute-icon">
+              <i class="fas fa-microphone"></i>
+            </div>
+            <div class="status-icon hidden" id="remote-video-icon">
+              <i class="fas fa-video"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-tile" id="local-tile">
+        <video class="user-video hidden" id="local-video" autoplay playsinline muted></video>
+        <div class="user-avatar-container" id="local-avatar-container">
+          <img src="https://via.placeholder.com/220" alt="You" class="user-avatar" id="local-avatar">
+        </div>
+        <div class="user-info">
+          <div class="user-name" id="local-username">You</div>
+          <div class="user-status">
+            <div class="status-icon" id="local-mute-icon">
+              <i class="fas fa-microphone"></i>
+            </div>
+            <div class="status-icon hidden" id="local-video-icon">
+              <i class="fas fa-video"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="call-controls">
+      <button class="control-btn" id="mute-btn">
+        <span class="control-label">Mute</span>
+        <i class="fas fa-microphone"></i>
+      </button>
+
+      <button class="control-btn hidden" id="video-btn">
+        <span class="control-label">Camera</span>
+        <i class="fas fa-video"></i>
+      </button>
+
+      <button class="control-btn hangup" id="hangup-btn">
+        <span class="control-label">End Call</span>
+        <i class="fas fa-phone-slash"></i>
+      </button>
+    </div>
+  </div>
+
+  <header>
+    <div class="header-content">
+      <div class="header-left">
+        <div class="header-logo" onclick="goHome()"></div>
+        <div class="header-title" onclick="goHome()">
+          <h1>ODIUM COLLECTIVE</h1>
+          <p>The elite stand together</p>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" class="search-input" id="search-input" placeholder="Search posts, users, communities...">
+        <div class="search-results" id="search-results"></div>
+      </div>
+
+      <div class="header-right">
+        <!-- XP Display -->
+        <div class="user-xp" id="user-xp">
+          <div class="user-level">Level <span id="user-level">1</span></div>
+          <div class="user-xp-bar">
+            <div class="user-xp-fill" id="user-xp-fill" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Notifications -->
+        <button class="icon-btn" id="notifications-btn" title="Notifications">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge" id="notification-count" style="display: none;">0</span>
+        </button>
+
+        <!-- Messages -->
+        <button class="icon-btn" id="messages-btn" title="Messages">
+          <i class="fas fa-envelope"></i>
+          <span class="notification-badge" id="message-count" style="display: none;">0</span>
+        </button>
+
+        <!-- Leaderboard -->
+        <button class="icon-btn" id="leaderboard-btn" title="Leaderboard">
+          <i class="fas fa-trophy"></i>
+        </button>
+
+        <!-- Achievements -->
+        <button class="icon-btn" id="achievements-btn" title="Achievements">
+          <i class="fas fa-star"></i>
+        </button>
+
+        <!-- Settings -->
+        <button class="icon-btn" id="settings-btn" title="Settings">
+          <i class="fas fa-cog"></i>
+        </button>
+
+        <!-- User Profile -->
+        <a href="#" class="icon-btn" id="user-profile-btn" style="text-decoration: none;">
+          <img src="" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%;" id="user-pfp-icon">
+        </a>
+
+        <button class="icon-btn" id="logout-btn" title="Logout">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- Communities -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">
+          COMMUNITIES
+          <button class="icon-btn" style="padding: 0.25rem; font-size: 1rem;" id="create-community-btn">+</button>
+        </div>
+        <div class="community-list" id="community-list"></div>
+      </div>
+
+      <!-- Bookmarks -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">BOOKMARKS</div>
+        <button class="filter-btn" id="view-bookmarks-btn" style="width: 100%;">View Saved Posts</button>
+      </div>
+
+      <!-- Drafts -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">DRAFTS</div>
+        <button class="filter-btn" id="view-drafts-btn" style="width: 100%;">View Drafts (<span id="draft-count">0</span>)</button>
+      </div>
+    </aside>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <!-- Live Chat (for main forum only) -->
+      <div class="chat-container" id="chat-container">
+        <div class="sidebar-title">LIVE CHAT</div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-container">
+          <input type="text" class="chat-input" id="chat-input" placeholder="Type a message...">
+          <button class="chat-send-btn" id="chat-send-btn">Send</button>
+        </div>
+      </div>
+
+      <!-- Posts List View -->
+      <div id="posts-list-view">
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <button class="filter-btn active" data-sort="new"><i class="fas fa-clock"></i> New</button>
+          <button class="filter-btn" data-sort="hot"><i class="fas fa-fire"></i> Hot</button>
+          <button class="filter-btn" data-sort="top"><i class="fas fa-arrow-up"></i> Top</button>
+          <button class="filter-btn" data-sort="controversial"><i class="fas fa-bolt"></i> Controversial</button>
+          
+          <select class="filter-btn" id="time-range-select" style="width: auto;">
+            <option value="all">All Time</option>
+            <option value="today">Today</option>
+            <option value="week">This Week</option>
+            <option value="month">This Month</option>
+          </select>
+
+          <button class="btn-primary" id="new-post-btn" style="margin-left: auto; padding: 0.75rem 1.5rem; border-radius: 12px;"><i class="fas fa-plus"></i> NEW POST</button>
+        </div>
+
+        <!-- Posts Container -->
+        <div id="posts-container"></div>
+      </div>
+
+      <!-- Post Detail View -->
+      <div id="post-detail-view" class="post-detail">
+        <button class="back-btn" id="back-btn"><i class="fas fa-arrow-left"></i> BACK TO FORUM</button>
+        <div class="detail-card">
+          <div class="detail-header">
+            <div class="detail-author">
+              <img src="" alt="Author" class="detail-pfp" id="detail-pfp">
+              <div class="detail-info">
+                <h1 id="detail-title"></h1>
+                <div class="post-meta">
+                  <span id="detail-author"></span>
+                  <span>•</span>
+                  <span id="detail-time"></span>
+                  <span>•</span>
+                  <span class="post-category-tag" id="detail-category"></span>
+                  <span id="detail-community-tag"></span>
+                </div>
+              </div>
+            </div>
+            <div class="detail-actions">
+              <button class="action-btn" id="detail-upvote-btn">
+                <i class="fas fa-arrow-up"></i> <span id="detail-upvotes">0</span>
+              </button>
+              <button class="action-btn" id="detail-downvote-btn">
+                <i class="fas fa-arrow-down"></i> <span id="detail-downvotes">0</span>
+              </button>
+              <button class="action-btn" id="detail-pin-btn" style="display: none;">
+                <i class="fas fa-thumbtack"></i> Pin
+              </button>
+              <button class="action-btn" id="detail-delete-btn" style="display: none;">
+                <i class="fas fa-trash"></i> Delete
+              </button>
+            </div>
+          </div>
+          <div class="detail-content" id="detail-content"></div>
+          <div id="detail-image-container"></div>
+        </div>
+
+        <div class="replies-section">
+          <h3 class="replies-title">Replies (<span id="replies-count">0</span>)</h3>
+          <div id="replies-container"></div>
+          <div class="reply-input-container">
+            <input type="text" class="reply-input" id="reply-input" placeholder="Write a reply...">
+            <button class="reply-submit-btn" id="reply-submit-btn">REPLY</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Notification Panel -->
+  <div class="notification-panel" id="notification-panel">
+    <div class="sidebar-title">NOTIFICATIONS</div>
+    <div id="notification-list"></div>
+  </div>
+
+  <!-- DM Sidebar -->
+  <div class="dm-sidebar" id="dm-sidebar">
+    <div class="sidebar-title">
+      MESSAGES
+      <button class="icon-btn" style="padding: 0.25rem; font-size: 0.9rem;" onclick="closeDMSidebar()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="dm-list" id="dm-list">
+      <div style="text-align: center; color: rgba(255,255,255,0.5); padding: 1rem;">
+        No conversations yet
+      </div>
+    </div>
+    <div id="dm-chat-area" style="display: none;">
+      <div class="sidebar-title" id="dm-chat-username" style="font-size: 1rem; margin-bottom: 0.5rem;">
+        <button class="icon-btn" style="padding: 0.25rem; font-size: 0.9rem;" onclick="closeDMChat()">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <span id="dm-chat-user-name"></span>
+      </div>
+      <div class="chat-messages" id="dm-messages" style="height: 300px; margin-top: 1rem;"></div>
+      <div class="chat-input-container" style="margin-top: 1rem;">
+        <input type="text" class="chat-input" id="dm-input" placeholder="Type a message...">
+        <button class="dm-send-btn" id="dm-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Post Modal -->
+  <div class="modal" id="create-post-modal">
+    <div class="modal-content">
+      <h2 class="modal-title">CREATE NEW POST</h2>
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" id="post-title" placeholder="Enter post title">
+      </div>
+      <div class="form-group">
+        <label>Content</label>
+        <textarea id="post-content" rows="6" placeholder="Write your post..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <select id="post-category">
+          <option value="general">General</option>
+          <option value="announcements">Announcements</option>
+          <option value="exploits">Exploits</option>
+          <option value="scripting">Scripting</option>
+          <option value="support">Support</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tags (comma-separated)</label>
+        <input type="text" id="post-tags" placeholder="tag1, tag2, tag3">
+      </div>
+      <div class="form-group">
+        <label>Image (Optional)</label>
+        <input type="file" id="post-image" accept="image/*">
+      </div>
+      <div class="form-group">
+        <label style="display: flex; align-items: center; gap: 0.5rem;">
+          <input type="checkbox" id="post-nsfw" style="width: auto;">
+          🔞 Mark as NSFW
+        </label>
+      </div>
+      <div class="modal-buttons">
+        <button class="btn-primary" id="submit-post-btn">POST</button>
+        <button class="btn-secondary" id="cancel-post-btn">CANCEL</button>
+        <button class="btn-secondary" id="save-draft-btn">SAVE DRAFT</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaderboard Modal -->
+  <div class="modal" id="leaderboard-modal">
+    <div class="modal-content">
+      <h2 class="modal-title"><i class="fas fa-trophy"></i> LEADERBOARD</h2>
+      <div class="filter-bar" style="margin-bottom: 1.5rem;">
+        <button class="filter-btn active" data-lb="xp">XP</button>
+        <button class="filter-btn" data-lb="reputation">Reputation</button>
+        <button class="filter-btn" data-lb="posts">Posts</button>
+        <button class="filter-btn" data-lb="streak">Streak</button>
+      </div>
+      <div id="leaderboard-content"></div>
+      <div class="modal-buttons">
+        <button class="btn-secondary" onclick="closeModal('leaderboard-modal')">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Achievements Modal -->
+  <div class="modal" id="achievements-modal">
+    <div class="modal-content">
+      <h2 class="modal-title"><i class="fas fa-star"></i> ACHIEVEMENTS</h2>
+      <div class="achievement-grid" id="achievement-grid"></div>
+      <div class="modal-buttons">
+        <button class="btn-secondary" onclick="closeModal('achievements-modal')">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal" id="settings-modal">
+    <div class="modal-content">
+      <h2 class="modal-title"><i class="fas fa-cog"></i> SETTINGS</h2>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <span>Theme</span>
+          <select id="theme-select" class="filter-btn">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <span>Font Size</span>
+          <select id="font-size-select" class="filter-btn">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <span>View Mode</span>
+          <select id="view-mode-select" class="filter-btn">
+            <option value="card">Card</option>
+            <option value="compact">Compact</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <span>Notifications</span>
+          <div class="toggle-switch" id="notifications-toggle">
+            <div class="toggle-slider"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button class="btn-primary" id="save-settings-btn">SAVE</button>
+        <button class="btn-secondary" onclick="closeModal('settings-modal')">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Community Modal -->
+  <div class="modal" id="create-community-modal">
+    <div class="modal-content">
+      <h2 class="modal-title">CREATE COMMUNITY</h2>
+      <div class="form-group">
+        <label>Community Name</label>
+        <input type="text" id="community-name" placeholder="Enter community name (3-21 characters)" maxlength="21">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="community-description" rows="4" placeholder="Describe your community..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Categories (comma-separated)</label>
+        <input type="text" id="community-categories" placeholder="general, discussion, support">
+      </div>
+      <div class="form-group">
+        <label style="display: flex; align-items: center; gap: 0.5rem;">
+          <input type="checkbox" id="community-private" style="width: auto;">
+          🔒 Private Community
+        </label>
+      </div>
+      <div class="modal-buttons">
+        <button class="btn-primary" id="submit-community-btn">CREATE</button>
+        <button class="btn-secondary" id="cancel-community-btn">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Alert Modal -->
+  <div class="modal" id="custom-alert-modal">
+    <div class="modal-content" style="max-width: 500px;">
+      <h2 class="modal-title" id="alert-title">
+        <i class="fas fa-info-circle"></i> NOTIFICATION
+      </h2>
+      <div style="padding: 1rem 0; color: rgba(255,255,255,0.85); font-size: 1.1rem; text-align: center;" id="alert-message"></div>
+      <div class="modal-buttons">
+        <button class="btn-primary" onclick="closeCustomAlert()" style="width: 100%;">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Confirm Modal -->
+  <div class="modal" id="custom-confirm-modal">
+    <div class="modal-content" style="max-width: 500px;">
+      <h2 class="modal-title" id="confirm-title">
+        <i class="fas fa-question-circle"></i> CONFIRM
+      </h2>
+      <div style="padding: 1rem 0; color: rgba(255,255,255,0.85); font-size: 1.1rem; text-align: center;" id="confirm-message"></div>
+      <div class="modal-buttons">
+        <button class="btn-primary" id="confirm-yes-btn">YES</button>
+        <button class="btn-secondary" id="confirm-no-btn">NO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Prompt Modal -->
+  <div class="modal" id="custom-prompt-modal">
+    <div class="modal-content" style="max-width: 500px;">
+      <h2 class="modal-title" id="prompt-title">
+        <i class="fas fa-edit"></i> INPUT
+      </h2>
+      <div style="padding: 1rem 0; color: rgba(255,255,255,0.85); margin-bottom: 1rem;" id="prompt-message"></div>
+      <div class="form-group">
+        <textarea id="prompt-input" rows="4" placeholder="Enter your text..." style="width: 100%;"></textarea>
+      </div>
+      <div class="modal-buttons">
+        <button class="btn-primary" id="prompt-submit-btn">SUBMIT</button>
+        <button class="btn-secondary" id="prompt-cancel-btn">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/forum.ob.min.js"></script>
+</body>
+</html>

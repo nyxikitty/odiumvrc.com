@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ODIUM COLLECTIVE - The Elite Forum</title>
+  <meta name="description" content="Join the Odium Collective - an elite forum for advanced users. Experience unparalleled performance and stand on the podium." />
+  
+  <meta property="og:title" content="ODIUM COLLECTIVE - The Elite Forum" />
+  <meta property="og:description" content="Join the Odium Collective - an elite forum for advanced users. Experience unparalleled performance and stand on the podium." />
+  <meta property="og:image" content="https://snoofz.net/public/uploads/6249af0c-484c-4f32-887e-638fc8f34aa9.png" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#e91f42" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ODIUM COLLECTIVE - The Elite Forum" />
+  <meta name="twitter:description" content="Join the Odium Collective - an elite forum for advanced users. Experience unparalleled performance and stand on the podium." />
+  <meta name="twitter:image" content="https://snoofz.net/public/uploads/6249af0c-484c-4f32-887e-638fc8f34aa9.png" />
+  
+  <link rel="icon" type="image/png" href="https://snoofz.net/public/uploads/6249af0c-484c-4f32-887e-638fc8f34aa9.png" />
+  <link rel="stylesheet" href="./login.min.css">
+
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cDot"></div>
+
+  <!-- tsParticles Background -->
+  <div id="tsparticles"></div>
+
+  <div class="container">
+    <div class="login-wrapper">
+      <div class="logo-section">
+        <div class="logo"></div>
+        <h1 class="brand-name">ODIUM</h1>
+        <p class="tagline">The best forum you will ever see</p>
+        <p class="subtitle">Experience unparalleled performance</p>
+        <p class="subtitle">The users of Odium, stand on the podium</p>
+      </div>
+
+      <div class="login-box">
+        <h2 class="login-title" id="form-title">ENTER THE REALM</h2>
+        
+        <div class="error-msg" id="error-msg"></div>
+
+        <div id="login-form">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Enter your username" autocomplete="username">
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password">
+          </div>
+
+          <button class="submit-btn" id="submit-btn">LOGIN</button>
+        </div>
+
+        <div class="toggle-text">
+          <span id="toggle-text">Don't have an account?</span>
+          <a onclick="location.href = 'https://odiumvrc.com/register'" class="toggle-link" id="toggle-link">Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- tsParticles Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/2.12.0/tsparticles.bundle.min.js"></script>
+
+  <script src="./login.ob.min.js"></script>
+</body>
+</html>

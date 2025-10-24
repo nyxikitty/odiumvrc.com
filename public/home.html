@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ODIUM - The Last Client You Will Ever Need</title>
+  <meta name="description" content="Experience the ultimate VRChat client with ODIUM - featuring intuitive design, comprehensive features, and enterprise-grade security." />
+  
+  <!-- Open Graph tags for social media previews -->
+  <meta property="og:title" content="ODIUM - The Last Client You Will Ever Need" />
+  <meta property="og:description" content="Experience the ultimate VRChat client with ODIUM - featuring intuitive design, comprehensive features, and enterprise-grade security." />
+  <meta property="og:image" content="https://github.com/user-attachments/assets/8e0fe0af-6a07-4421-8a17-f1af12ca2b27" />
+  <meta property="og:url" content="https://2a8868be-845b-42d5-8524-f7d55bc59332-00-3q7jyl3yyvxca.kirk.replit.dev/" />
+  <meta property="og:type" content="website" />
+
+  <meta name="theme-color" content="#e91f42" />
+
+  <!-- Twitter Card tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ODIUM - The Last Client You Will Ever Need" />
+  <meta name="twitter:description" content="Experience the ultimate VRChat client with ODIUM - featuring intuitive design, comprehensive features, and enterprise-grade security." />
+  <meta name="twitter:image" content="https://github.com/user-attachments/assets/8e0fe0af-6a07-4421-8a17-f1af12ca2b27" />
+  
+  <link rel="icon" type="image/png" href="https://snoofz.net/public/uploads/6249af0c-484c-4f32-887e-638fc8f34aa9.png" />
+  <link rel="stylesheet" href="https://snoofz.net/public/uploads/e7b0ee3e-d13b-4ab5-a448-2e1819ae9203.css">
+</head>
+<body>
+  <!-- Entry overlay -->
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <h2>Click to begin your journey</h2>
+      <p style="opacity:.8;margin-top:6px">We'll enable sound, visuals and unlock the site.</p>
+      <button id="gateBtn" aria-label="Begin">ENTER</button>
+    </div>
+  </div>
+
+  <!-- Visual background -->
+  <div id="tsparticles"></div>
+
+  <div class="top-actions" aria-label="External Links">
+  <!-- YouTube -->
+  <a class="icon-btn" id="ytBtn" href="https://www.youtube.com/watch?v=HErQalyu94U" target="_blank" rel="noopener" data-tip="YouTube" aria-label="Open YouTube">
+    <!-- YouTube SVG -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.8 3 12 3 12 3s-6.8 0-8.7.4A4 4 0 0 0 .5 6.2 41.5 41.5 0 0 0 0 12c0 2 .2 3.9.5 5.8a4 4 0 0 0 2.8 2.8C5.2 21 12 21 12 21s6.8 0 8.7-.4a4 4 0 0 0 2.8-2.8c.3-1.9.5-3.8.5-5.8 0-2-.2-3.9-.5-5.8zM9.8 15.5V8.5L15.8 12l-6 3.5z" fill="currentColor"/>
+    </svg>
+  </a>
+
+    <!-- Discord -->
+    <a class="icon-btn" id="dcBtn" href="https://discord.gg/Xc7wmNzmPT" target="_blank" rel="noopener" data-tip="Discord" aria-label="Open Discord">
+        <!-- Discord SVG -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.3 4.6A16 16 0 0 0 15.9 3l-.6 1.1a14 14 0 0 1 2.8 1c-3-.9-6-.9-9 0a14 14 0 0 1 2.8-1L11.3 3a16 16 0 0 0-4.4 1.6C3.3 9 2.5 13.2 2.8 17.4A16 16 0 0 0 8 19.7l.9-1.5a10 10 0 0 1-1.6-.8l.4-.3c3 1.4 6.4 1.4 9.4 0l.4.3c-.5.3-1 .6-1.6.8l.9 1.5a16 16 0 0 0 5.2-2.3c.3-4.2-.5-8.4-2.7-13zM9.6 14.7c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm4.8 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z" fill="currentColor"/>
+        </svg>
+    </a>
+    </div>
+
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" id="cDot"></div>
+  <div class="cursor-ring" id="cRing"></div>
+
+  <div class="container" aria-hidden="true" id="content">
+    <div class="logo-container"><div class="logo"></div></div>
+    <h1 class="brand-name">ODIUM</h1>
+
+    <div class="tagline">
+      <span class="typewriter-line" id="line1">The best client you will ever see.</span>
+      <span class="typewriter-line" id="line2">Experience unparalleled performance.</span>
+      <span class="typewriter-line" id="line3">The users of Odium, stand on the podium.</span>
+    </div>
+
+    <button class="cta-button" id="discordBtn">Join the forum</button>
+
+    <!-- Slideshow -->
+    <div class="slideshow-container">
+      <div class="slide active">
+        <div class="slide-content">
+          <div class="slide-image" style="background-image:url('https://snoofz.net/public/uploads/abe01a7b-a02d-43fd-a920-8f5a16955e27.png');"></div>
+          <div class="slide-text">
+            <h3 class="slide-title">Intuitive Interface Design</h3>
+            <p class="slide-description">Experience a streamlined, user-focused interface engineered for maximum efficiency and seamless navigation throughout your VRChat sessions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <div class="slide-image" style="background-image:url('https://snoofz.net/public/uploads/48501eb5-1fa3-4f5e-affc-112b737c294c.png');"></div>
+          <div class="slide-text">
+            <h3 class="slide-title">Comprehensive Feature Suite</h3>
+            <p class="slide-description">Access an extensive collection of cutting-edge tools and utilities designed to elevate your VRChat experience to unprecedented levels of customization and control.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <div class="slide-image" style="background-image:url('https://github.com/user-attachments/assets/351d424b-b033-44ff-ad56-9074168d0b64');"></div>
+          <div class="slide-text">
+            <h3 class="slide-title">Advanced User Exploits</h3>
+            <p class="slide-description">Leverage powerful exploitation capabilities that meet user expectations while maintaining optimal performance and reliability standards in all environments.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <div class="slide-image" style="background-image:url('https://github.com/user-attachments/assets/93877bbc-c7bc-4c56-ba1f-2d459f50209f');"></div>
+          <div class="slide-text">
+            <h3 class="slide-title">Enterprise-Grade Security</h3>
+            <p class="slide-description">Benefit from comprehensive anti-crash and network protection systems that safeguard against malicious modified client users, ensuring uninterrupted gameplay.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <div class="slide-image" style="background-image:url('https://github.com/user-attachments/assets/cb1dcd35-8139-4aa7-ab0e-88464e9bab59');"></div>
+          <div class="slide-text">
+            <h3 class="slide-title">Organized Settings Architecture</h3>
+            <p class="slide-description">Navigate through a meticulously structured interface featuring logically categorized options and settings, ensuring quick access to all functionality without complexity.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <div class="slide-image" style="background-image:url('https://github.com/user-attachments/assets/8e0fe0af-6a07-4421-8a17-f1af12ca2b27');"></div>
+          <div class="slide-text">
+            <h3 class="slide-title">Professional Console Logging</h3>
+            <p class="slide-description">Monitor system operations with crystal-clear, informative console output integrated directly into the QuickMenu for real-time diagnostics and debugging capabilities.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <div class="slide-image" style="background-image:url('https://github.com/user-attachments/assets/fa1f6102-402d-4876-a4ce-729a79cfe985');"></div>
+          <div class="slide-text">
+            <h3 class="slide-title">Multi-Instance Bot Control</h3>
+            <p class="slide-description">Deploy sophisticated Application and Photon bots with advanced features including synchronized audio playback, USpeak mimicry, movement replication, lobby protection, desync capabilities, and comprehensive multi-account management.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="slideshow-nav prev" onclick="changeSlide(-1)">‹</button>
+      <button class="slideshow-nav next" onclick="changeSlide(1)">›</button>
+
+      <div class="slideshow-indicators">
+        <span class="indicator active" onclick="currentSlide(1)"></span>
+        <span class="indicator" onclick="currentSlide(2)"></span>
+        <span class="indicator" onclick="currentSlide(3)"></span>
+        <span class="indicator" onclick="currentSlide(4)"></span>
+        <span class="indicator" onclick="currentSlide(5)"></span>
+        <span class="indicator" onclick="currentSlide(6)"></span>
+        <span class="indicator" onclick="currentSlide(7)"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOW PLAYING + Playlist -->
+  <div class="audio-ui" id="audioUI" style="display:none">
+    <span class="now">NOW PLAYING</span>
+    <span class="track" id="nowTrack">—</span>
+    <div class="controls">
+      <button id="prevBtn">⟨⟨</button>
+      <button id="playPauseBtn">⟂⟂ / ▶</button>
+      <button id="nextBtn">⟩⟩</button>
+    </div>
+  </div>
+  <div class="playlist" id="playlist" style="display:none">
+    <h4>Playlist</h4>
+    <div id="plistItems"></div>
+  </div>
+
+  <!-- Lightbox Preview -->
+  <div class="preview" id="preview">
+    <div class="preview-card">
+      <button class="preview-close" id="pvClose" title="Close">✕</button>
+      <button class="preview-prev" id="pvPrev" title="Previous">‹</button>
+      <button class="preview-next" id="pvNext" title="Next">›</button>
+      <img id="pvImg" alt="Preview" />
+      <div class="preview-caption" id="pvCap"></div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2 class="modal-title">That’s Unfortunate!</h2>
+      <p class="modal-text">Odium is no longer available for public sale due to persistent security concerns and malicious activity targeting our systems. We appreciate your support and understanding.</p>
+      <button class="modal-btn" id="modalClose">OK</button>
+    </div>
+  </div>
+
+  <!-- libs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/2.12.0/tsparticles.bundle.min.js"></script>
+  <script src="./AJAX02834884.js"></script>
+</body>
+</html>

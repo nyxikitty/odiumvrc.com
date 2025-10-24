@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@fastify/cookie": "^9.x.x",
+    "@fastify/multipart": "^8.x.x",
+    "@fastify/session": "^10.x.x",
+    "@fastify/static": "^6.x.x",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.3",
+    "fastify": "^4.x.x",
+    "nodemailer": "^6.x.x",
+    "pino-pretty": "^13.1.2",
+    "sanitize-html": "^2.17.0",
+    "uWebSockets.js": "uNetworking/uWebSockets.js#v20.52.0",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20.x.x",
+    "@types/nodemailer": "^6.x.x",
+    "@types/sanitize-html": "^2.16.0",
+    "@types/ws": "^8.18.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
