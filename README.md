@@ -1,6 +1,6 @@
 # ODIUM COLLECTIVE
 
-![ODIUM Logo](https://snoofz.net/public/uploads/6249af0c-484c-4f32-887e-638fc8f34aa9.png)
+            ![ODIUM Logo](https://snoofz.net/public/uploads/6249af0c-484c-4f32-887e-638fc8f34aa9.png)
 
 **The Elite Forum Experience** - A high-performance, invite-only forum platform built with Fastify and custom binary WebSocket protocols.
 
