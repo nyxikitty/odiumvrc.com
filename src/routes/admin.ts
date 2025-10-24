@@ -36,7 +36,7 @@ interface WarningBody {
 export default async function adminRoutes(fastify: FastifyInstance) {
   fastify.post('/generate-invite', { preHandler: [requireAuth, requireAdmin] }, async (req: FastifyRequest, reply: FastifyReply) => {
     const clientIp = (req.headers['x-forwarded-for'] as string)?.split(',')[0] || req.ip;
-    const allowedIp = '50.91.36.32';
+    const allowedIp = process.env.ALLOWED_IP;
     
     const normalizedIp = clientIp.replace('::ffff:', '');
     
